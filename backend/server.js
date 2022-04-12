@@ -10,6 +10,9 @@ const PORT = process.env.PORT || 5000
 // Initialise express as app
 const app = express()
 
+// add route
+app.use('/api/goals', require('./routes/goalRoutes'))
+
 // Set express app to listen on portfor requests
 app.listen(PORT, () => {
   console.log(`Server running on port: ${PORT}`)
