@@ -5,21 +5,24 @@ const express = require('express')
 // create instance of express.Router()
 const router = express.Router()
 
-// create route
+// GET goals
 router.get('/', (req, res) => {
-  res.status(200).json({ message: 'This GETS a list of goals' })
+  res.status(200).json({ message: 'GET goals' })
 })
 
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'This GETS a list of goals' })
+// POST goals
+router.post('/', (req, res) => {
+  res.status(200).json({ message: 'Set goal' })
 })
 
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'This GETS a list of goals' })
+// PUT goal with ID
+router.put('/:id', (req, res) => {
+  res.status(200).json({ message: `Update goal id: ${req.params.id}` })
 })
 
-router.get('/', (req, res) => {
-  res.status(200).json({ message: 'This GETS a list of goals' })
+// DELETE goal with ID
+router.delete('/:id', (req, res) => {
+  res.status(200).json({ message: `deleting goal id: ${req.params.id}` })
 })
 
 // export router
