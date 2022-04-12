@@ -1,0 +1,29 @@
+{
+  "name": "learn-the-mern-stack",
+  "version": "1.0.0",
+  "description": "Traversy Media MERN tutorial project",
+  "main": "server.js",
+  "scripts": {
+    "start": "node backend/server.js",
+    "server": "nodemon backend/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JAYMAC1/small-mern-project.git"
+  },
+  "author": "James McNeil",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/JAYMAC1/small-mern-project/issues"
+  },
+  "homepage": "https://github.com/JAYMAC1/small-mern-project#readme",
+  "dependencies": {
+    "colors": "^1.4.0",
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "mongoose": "^6.2.10"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.15"
+  }
+}
