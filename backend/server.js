@@ -1,14 +1,14 @@
-// import express
-const express = require('express')
+// npm package imports express
+const express = require('express') // imports express
+const dotenv = require('dotenv').config() // import dotenv for using environment variables
 
-// import dotenv for using environment variables
-const dotenv = require('dotenv').config()
+const PORT = process.env.PORT || 5000 // Set port for express app
 
-// Set port for express app
-const PORT = process.env.PORT || 5000
+const app = express() // Initialise express as app
 
-// Initialise express as app
-const app = express()
+// Middleware Section
+app.use(express.json()) // parse body where JSON
+app.use(express.urlencoded({ extended: false })) // parse body where urlEncoded
 
 // add route
 app.use('/api/goals', require('./routes/goalRoutes'))
