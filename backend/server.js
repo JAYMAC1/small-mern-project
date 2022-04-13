@@ -14,6 +14,7 @@ app.use(express.urlencoded({ extended: false })) // parse body where urlEncoded
 
 // add route
 app.use('/api/goals', require('./routes/goalRoutes'))
+app.use('/api/users', require('./routes/userRoutes'))
 app.use(errorHandler)
 
 // Set express app to listen on portfor requests
