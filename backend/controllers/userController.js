@@ -1,8 +1,10 @@
 // import express-async-handler
 const asyncHandler = require('express-async-handler')
+const jwt = require('jsonwebtoken')
+const bcrypt = require('bcryptjs')
 
 // import user model
-// const User = require('../models/userModel')
+const User = require('../models/userModel')
 
 // @desc    controller create user
 // @route   POST /api/users
