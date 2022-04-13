@@ -3,8 +3,9 @@ const express = require('express') // imports express
 const dotenv = require('dotenv').config() // import dotenv for using environment variables
 
 const { errorHandler } = require('./middleware/errorMiddleware')
+const connectDB = require('./config/db')
 const PORT = process.env.PORT || 5000 // Set port for express app
-
+connectDB()
 const app = express() // Initialise express as app
 
 // Middleware Section
