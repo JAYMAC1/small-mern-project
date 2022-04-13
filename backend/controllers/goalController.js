@@ -1,6 +1,9 @@
 // import express-async-handler
 const asyncHandler = require('express-async-handler')
 
+// import goals model
+const Goal = require('../models/goalModel')
+
 // @desc    controller to fetch goals
 // @route   GET /api/goals
 // @access  Private
