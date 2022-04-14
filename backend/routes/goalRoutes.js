@@ -13,11 +13,13 @@ const {
   updateGoal,
 } = require('../controllers/goalController')
 
+const { protect } = require('../middleware/authMiddleware')
+
 // GET goals || POST goal
-router.route('/').get(getGoals).post(setGoal)
+router.route('/').get(protect, getGoals).post(protect, setGoal)
 
 // PUT goal with ID || DELETE goal with ID
-router.route('/:id').put(updateGoal).delete(deleteGoal)
+router.route('/:id').put(protect, updateGoal).delete(protect, deleteGoal)
 
 // export router
 module.exports = router
