@@ -2,7 +2,7 @@ import { createSlice, createAsyncThunk } from '@reduxjs/toolkit'
 import goalService from './goalService'
 
 const initialState = {
-  goal: null,
+  goals: [],
   isError: false,
   isSuccess: false,
   isLoading: false,
@@ -14,7 +14,8 @@ export const createGoal = createAsyncThunk(
   'goal/create',
   async (goal, thunkAPI) => {
     try {
-      return await goalService.createGoal(goal)
+      const token = thunkAPI.getState().auth.user.token
+      return await goalService.createGoal(goal, token)
     } catch (error) {
       const message =
         (error.response &&
@@ -27,16 +28,26 @@ export const createGoal = createAsyncThunk(
   }
 )
 
+// Fetch user goals
+export const getGoals = createAsyncThunk('goal/getAll', async (_, thunkAPI) => {
+  try {
+    const token = thunkAPI.getState().auth.user.token
+    return await goalService.getGoals(token)
+  } catch (error) {
+    const message =
+      (error.response && error.response.data && error.response.data.message) ||
+      error.message ||
+      error.toString()
+
+    return thunkAPI.rejectWithValue(message)
+  }
+})
+
 export const goalSlice = createSlice({
   name: 'goal',
   initialState,
   reducers: {
-    reset: (state) => {
-      state.isError = false
-      state.isLoading = false
-      state.isSuccess = false
-      state.message = ''
-    },
+    reset: (state) => initialState,
   },
   extraReducers: (builder) => {
     builder
@@ -49,6 +60,20 @@ export const goalSlice = createSlice({
         state.goal = action.payload
       })
       .addCase(createGoal.rejected, (state, action) => {
+        state.isLoading = false
+        state.isError = true
+        state.message = action.payload
+        state.goal = null
+      })
+      .addCase(getGoals.pending, (state) => {
+        state.isLoading = true
+      })
+      .addCase(getGoals.fulfilled, (state, action) => {
+        state.isLoading = false
+        state.isSuccess = true
+        state.goal = action.payload
+      })
+      .addCase(getGoals.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
