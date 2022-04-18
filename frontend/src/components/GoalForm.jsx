@@ -15,22 +15,26 @@ const GoalForm = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
 
-  const { user, isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.auth
+  const { user } = useSelector((state) => state.auth)
+
+  const { isLoading, isError, isSuccess, message } = useSelector(
+    (state) => state.goals
   )
 
   useEffect(() => {
     if (isError) {
       toast.error(message)
     }
-
-    dispatch(reset())
+    if (isSuccess) {
+      toast.success(message)
+      dispatch(reset())
+    }
   }, [isError, isSuccess, user, message, navigate, dispatch])
 
   const onSubmit = (e) => {
     e.preventDefault()
 
-    dispatch(createGoal(formData))
+    dispatch(createGoal({ ...formData }))
   }
 
   const onChange = (e) => {
