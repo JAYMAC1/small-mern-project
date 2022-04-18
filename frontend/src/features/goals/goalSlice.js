@@ -57,13 +57,13 @@ export const goalSlice = createSlice({
       .addCase(createGoal.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.goal = action.payload
+        state.goals = action.payload
       })
       .addCase(createGoal.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
-        state.goal = null
+        state.goals = null
       })
       .addCase(getGoals.pending, (state) => {
         state.isLoading = true
@@ -71,13 +71,13 @@ export const goalSlice = createSlice({
       .addCase(getGoals.fulfilled, (state, action) => {
         state.isLoading = false
         state.isSuccess = true
-        state.goal = action.payload
+        state.goals = action.payload
       })
       .addCase(getGoals.rejected, (state, action) => {
         state.isLoading = false
         state.isError = true
         state.message = action.payload
-        state.goal = null
+        state.goals = null
       })
   },
 })
