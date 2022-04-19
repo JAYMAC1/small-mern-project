@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react'
-import { createGoal, reset } from '../features/goals/goalSlice'
+import { createGoal } from '../features/goals/goalSlice'
 import { useSelector, useDispatch } from 'react-redux'
-import { useNavigate } from 'react-router-dom'
 import { toast } from 'react-toastify'
-import Spinner from '../components/Spinner'
 
 const GoalForm = () => {
   const [formData, setFormData] = useState({
@@ -12,29 +10,27 @@ const GoalForm = () => {
 
   const { text } = formData
 
-  const navigate = useNavigate()
   const dispatch = useDispatch()
-
-  const { user } = useSelector((state) => state.auth)
 
   const { isLoading, isError, isSuccess, message } = useSelector(
     (state) => state.goals
   )
 
+  // dispatch(getGoals())
+
   useEffect(() => {
+    // dispatch(getGoals())
     if (isError) {
       toast.error(message)
     }
-    if (isSuccess) {
-      toast.success(message)
-      dispatch(reset())
-    }
-  }, [isError, isSuccess, user, message, navigate, dispatch])
+  }, [isError, isSuccess, message, dispatch])
 
   const onSubmit = (e) => {
     e.preventDefault()
-
     dispatch(createGoal({ ...formData }))
+    setFormData({
+      text: '',
+    })
   }
 
   const onChange = (e) => {
@@ -42,10 +38,6 @@ const GoalForm = () => {
       ...prevState,
       [e.target.name]: e.target.value,
     }))
-  }
-
-  if (isLoading) {
-    return <Spinner />
   }
 
   return (
