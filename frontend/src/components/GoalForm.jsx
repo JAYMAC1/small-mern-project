@@ -12,9 +12,7 @@ const GoalForm = () => {
 
   const dispatch = useDispatch()
 
-  const { isLoading, isError, isSuccess, message } = useSelector(
-    (state) => state.goals
-  )
+  const { isError, message } = useSelector((state) => state.goals)
 
   // dispatch(getGoals())
 
@@ -23,7 +21,7 @@ const GoalForm = () => {
     if (isError) {
       toast.error(message)
     }
-  }, [isError, isSuccess, message, dispatch])
+  }, [isError, message])
 
   const onSubmit = (e) => {
     e.preventDefault()
